@@ -8,6 +8,9 @@
 //   4. The ISS API returns the position keys as `latitude` and `longitude`.
 //      Return them as `lat` and `lng` instead.
 
+// Exercise 1 - `getIssPosition`
+// -----------------------------
+
 // require the 'request-promise' module.
 const request = require('request-promise');
 
@@ -17,14 +20,17 @@ function getIssPosition() {
         .then(response => {
             // Parse as JSON
             const issLocation = JSON.parse(response);
-
             // Return object with lat and lng
             return {
                 lat: issLocation.iss_position.latitude,
                 lng: issLocation.iss_position.longitude,
             }
-        });
+        })
+        .then(data => {
+            console.log(data);  // console.log the result within the .then chain to inspect data
+            return data;        // return it to continue the data down the chain of Promises (if needed)
+        })
+        .catch(err => console.log('Error: ', err));
 }
 
-// psst.... don't forget to call the function
 getIssPosition();

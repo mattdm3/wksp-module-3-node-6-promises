@@ -11,26 +11,26 @@
 
 const opencage = require('opencage-api-client');
 
-
 function getAddressPosition(address) {
     const requestObj = {
-        key: '1315122032774d06b34c570f3bd70f7b',
+        key: 'a448d1b4561642b2821380cdc683cc9c',
         q: address
     };
 
+
     return opencage.geocode(requestObj)
         .then(data => {
-            // if (data.status.code == 200) {
-                // if (data.results.length > 0) {
+            if (data.status.code == 200) {
+                if (data.results.length > 0) {
                     const place = data.results[0];
-                    // console.log(place.geometry);
+                    console.log(place.geometry);
                     return place;
-                // }
-            // } else {
-            //     // other possible response codes:
-            //     // https://opencagedata.com/api#codes
-            //     console.log('error', data.status.message);
-            // }
+                }
+            } else {
+                // other possible response codes:
+                // https://opencagedata.com/api#codes
+                console.log('error', data.status.message);
+            }
         })
         .catch(error => console.log('error', error.message));
 }
